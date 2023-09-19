@@ -10,13 +10,17 @@ import {
 } from '@nestjs/common';
 import { CreateMemberDto } from './dto/create-member.dto';
 import { UpdateMemberDto } from './dto/update-member.dto';
+import { MembersService } from './members.service';
 
 @Controller('members')
 export class MembersController {
+  constructor(private readonly membersService: MembersService) {}
+
   // GET /members
   @Get()
-  getMembers(@Query('type') type: string) {
-    return [{ type }];
+  getMembers(@Query('sport') sport: 'boxing' | 'pilates') {
+    // const service = new MembersService();
+    return this.membersService.getMembers(sport);
   }
   // GET /members/:id
   @Get(':id')
