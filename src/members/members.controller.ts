@@ -25,16 +25,12 @@ export class MembersController {
   // GET /members/:id
   @Get(':id')
   getMember(@Param('id') id: string) {
-    return {
-      id,
-    };
+    return this.membersService.getMember(+id); // type cast string id into number
   }
   // POST /members
   @Post()
   createMember(@Body() createMemberDto: CreateMemberDto) {
-    return {
-      name: createMemberDto.name,
-    };
+    return this.membersService.createMember(createMemberDto);
   }
   // PUT /members/:id
   @Put(':id')
@@ -42,16 +38,11 @@ export class MembersController {
     @Param('id') id: string,
     @Body() updateMemberDto: UpdateMemberDto,
   ) {
-    return {
-      id,
-      name: updateMemberDto.name,
-    };
+    return this.membersService.updateMember(+id, updateMemberDto);
   }
   // DELETE /members/:id
   @Delete(':id')
   removeMember(@Param('id') id: string) {
-    return {
-      id,
-    };
+    this.membersService.removeMember(+id);
   }
 }
