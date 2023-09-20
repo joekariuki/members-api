@@ -46,4 +46,12 @@ export class MembersService {
 
     return this.getMember(id);
   }
+
+  removeMember(id: number) {
+    const memberToRemove = this.getMember(id);
+
+    this.members = this.members.filter((member) => member.id !== id);
+
+    return memberToRemove;
+  }
 }
