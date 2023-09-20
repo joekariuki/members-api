@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CreateMemberDto } from './dto/create-member.dto';
+import { UpdateMemberDto } from './dto/update-member.dto';
 
 @Injectable()
 export class MembersService {
@@ -33,5 +34,16 @@ export class MembersService {
     this.members.push(newMember);
 
     return newMember;
+  }
+
+  updateMember(id: number, updateMemberDto: UpdateMemberDto) {
+    this.members = this.members.map((member) => {
+      if (member.id === id) {
+        return { ...member, ...updateMemberDto };
+      }
+      return member;
+    });
+
+    return this.getMember(id);
   }
 }
