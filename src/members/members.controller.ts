@@ -7,6 +7,7 @@ import {
   Post,
   Put,
   Query,
+  NotFoundException,
 } from '@nestjs/common';
 import { CreateMemberDto } from './dto/create-member.dto';
 import { UpdateMemberDto } from './dto/update-member.dto';
@@ -25,7 +26,11 @@ export class MembersController {
   // GET /members/:id
   @Get(':id')
   getMember(@Param('id') id: string) {
-    return this.membersService.getMember(+id); // type cast string id into number
+    try {
+      return this.membersService.getMember(+id); // type cast string id into number
+    } catch (err) {
+      throw new NotFoundException();
+    }
   }
   // POST /members
   @Post()
