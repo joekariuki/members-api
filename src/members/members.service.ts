@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { CreateMemberDto } from './dto/create-member.dto';
 
 @Injectable()
 export class MembersService {
@@ -22,5 +23,15 @@ export class MembersService {
     }
 
     return member;
+  }
+
+  createMember(createMemberDto: CreateMemberDto) {
+    const newMember = {
+      ...createMemberDto,
+      id: Date.now(),
+    };
+    this.members.push(newMember);
+
+    return newMember;
   }
 }
