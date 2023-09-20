@@ -13,4 +13,14 @@ export class MembersService {
     }
     return this.members;
   }
+
+  getMember(id: number) {
+    const member = this.members.find((member) => member.id === id);
+
+    if (!member) {
+      throw new Error('Member not found');
+    }
+
+    return member;
+  }
 }
