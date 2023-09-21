@@ -10,10 +10,12 @@ import {
   NotFoundException,
   ParseIntPipe,
   ValidationPipe,
+  UseGuards,
 } from '@nestjs/common';
 import { CreateMemberDto } from './dto/create-member.dto';
 import { UpdateMemberDto } from './dto/update-member.dto';
 import { MembersService } from './members.service';
+import { RankingGuard } from 'src/ranking/ranking.guard';
 
 @Controller('members')
 export class MembersController {
@@ -35,6 +37,7 @@ export class MembersController {
     }
   }
   // POST /members
+  @UseGuards(RankingGuard)
   @Post()
   createMember(@Body(new ValidationPipe()) createMemberDto: CreateMemberDto) {
     return this.membersService.createMember(createMemberDto);
