@@ -1,3 +1,3 @@
 # Members API
 
-Simple Nest JS API that allows you to create, retrieve, update and delete (CRUD) members of a sports club
+Simple API built with NestJS that allows you to create, retrieve, update and delete (CRUD) members of a sports club
