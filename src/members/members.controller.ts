@@ -8,6 +8,7 @@ import {
   Put,
   Query,
   NotFoundException,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { CreateMemberDto } from './dto/create-member.dto';
 import { UpdateMemberDto } from './dto/update-member.dto';
@@ -25,9 +26,9 @@ export class MembersController {
   }
   // GET /members/:id
   @Get(':id')
-  getMember(@Param('id') id: string) {
+  getMember(@Param('id', ParseIntPipe) id: number) {
     try {
-      return this.membersService.getMember(+id); // type cast string id into number
+      return this.membersService.getMember(id); // type cast string id into number
     } catch (err) {
       throw new NotFoundException();
     }
