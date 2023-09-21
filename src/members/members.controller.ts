@@ -9,6 +9,7 @@ import {
   Query,
   NotFoundException,
   ParseIntPipe,
+  ValidationPipe,
 } from '@nestjs/common';
 import { CreateMemberDto } from './dto/create-member.dto';
 import { UpdateMemberDto } from './dto/update-member.dto';
@@ -35,7 +36,7 @@ export class MembersController {
   }
   // POST /members
   @Post()
-  createMember(@Body() createMemberDto: CreateMemberDto) {
+  createMember(@Body(new ValidationPipe()) createMemberDto: CreateMemberDto) {
     return this.membersService.createMember(createMemberDto);
   }
   // PUT /members/:id
